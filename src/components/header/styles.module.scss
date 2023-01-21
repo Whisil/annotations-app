@@ -1,0 +1,36 @@
+@import '../../styles/colors.scss';
+
+.header{
+    position: relative;
+    padding: 10px 40px;
+    background-color: $lightBlack;
+
+    .loginBtn{
+        display: flex;
+        align-items: center;
+        margin-right: 0;
+        margin-left: auto;
+        gap: 8px;
+        border-radius: 4px;
+        background-color: $btnBg;
+        padding: 9px 24px;
+        color: $lightBlack;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 600;
+        transition: background-color .2s ease;
+        cursor: pointer;
+
+        &:hover{
+            background-color: rgba($btnBg, 0.8);
+        }
+        &:active{
+            background-color: rgba($btnBg, 0.6);
+        }
+
+        &Logo{
+            width: 32px;
+            height: 32px;
+        } 
+    }
+}

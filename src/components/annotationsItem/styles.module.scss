@@ -1,0 +1,207 @@
+@import '../../styles/colors.scss';
+
+.annotationsItem{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-16px, -16px);
+    
+    .dot{
+        border-radius: 100%;
+        background-color: #EF7058;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &Id{
+            font-size: 14px;
+            line-height: 16px;
+            color: #fff;
+            font-weight: bold;
+        }
+    }
+}
+
+.commentContainer{
+    position: absolute;
+    top: 60px;
+    width: 364px;
+    padding: 14px 24px 20px 24px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid $border;
+
+    @media screen and (max-width:576px){
+        width: 200px;
+    }
+    
+    &::before{
+        content: "";
+        display: block;
+        position: absolute;
+        background-color: #fff;
+        border-left: 1px solid $border;
+        border-top: 1px solid $border;
+        height: 12px;
+        width: 12px;
+        z-index: 2;
+        transform: rotate(45deg);
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        top: -6px
+    }
+
+    .commentForm{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid rgba($gray, 0.5);
+
+        &Input{
+            width: 100%;
+            background-color: transparent;
+            font-size: 14px;
+            line-height: 18px;
+            font-weight: 400;
+            color: $ExtraLightBlack;
+
+            &::placeholder{
+                line-height: 20px;
+                color: $gray;
+            }
+
+            &:focus-visible{
+                outline: none;
+            }
+        }
+
+        &Btn{
+            transition: transform .2s ease;
+            &:hover{
+                transform: scale(1.2);
+            }
+
+            &:disabled{
+                cursor: not-allowed;
+                transform: none;
+            }
+        }
+    }
+
+    //ready annotation styles
+    .annotation{
+        display: flex;
+        gap: 10px;
+
+        &Avatar{
+            min-width: 32px;
+            height: 32px;
+            border-radius: 100%;
+            background-color: #DB7474;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            line-height: 16px;
+            color: #FDD5D5;
+            font-weight: 600;
+        }
+
+        &Author{
+            font-size: 14px;
+            line-height: 16px;
+            color: $ExtraLightBlack;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        &Text{
+            font-size: 14px;
+            line-height: 18px;
+            color: $ExtraLightBlack;
+            font-weight: 400;
+        }
+    }
+
+    .deleteBtn{
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        transition: transform .2s ease;
+        cursor: pointer;
+
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+    
+}
+
+.alignRightLarge{
+    align-items: baseline;
+
+    .commentContainer{
+        &::before{
+            left: 10px;
+            right: unset;
+            margin: unset;
+        }
+    }
+}
+
+.alignLeftLarge{
+    align-items: flex-end;
+
+    .commentContainer{
+        &::before{
+            left: unset;
+            right: 10px;
+            margin: unset;
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+    .alignRight{
+        align-items: baseline;
+
+        .commentContainer{
+            &::before{
+                left: 10px;
+                right: unset;
+                margin: unset;
+            }
+        }
+    }
+
+    .alignLeft{
+        align-items: flex-end;
+
+        .commentContainer{
+            &::before{
+                left: unset;
+                right: 10px;
+                margin: unset;
+            }
+        }
+    }
+
+}
+
+.alignTop{ 
+    .commentContainer{
+        top: -81px;
+
+        &::before{
+            transform: rotate(225deg);
+            top: calc(100% - 6px);
+        }
+    }
+}

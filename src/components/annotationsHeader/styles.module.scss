@@ -1,0 +1,46 @@
+@import '../../styles/colors.scss';
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+
+    @media screen and (max-width: 768px){
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .heading{
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 33px;
+        color: #fff;
+    }
+
+    .input{
+        height: 0.1px;
+        width: 0.1px;
+        position: absolute;
+        visibility: hidden;
+    }
+
+    .btn{
+        border-radius: 4px;
+        background-color: $btnBg;
+        padding: 9px 24px;
+        color: $lightBlack;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 600;
+        transition: background-color .2s ease;
+        cursor: pointer;
+
+        &:hover{
+            background-color: rgba($btnBg, 0.8);
+        }
+        &:active{
+            background-color: rgba($btnBg, 0.6);
+        }
+    }
+}

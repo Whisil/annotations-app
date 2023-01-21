@@ -1,0 +1,28 @@
+@import '../../styles/colors.scss';
+
+.canvas{
+    margin-bottom: 40px;
+    height: 100%;
+    background-color: $lightBlack;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+
+    &Image{
+        display: block;
+        height: auto;
+        min-height: 200px;
+        max-width: 100%;
+        cursor: pointer;
+    }
+
+    &Container{
+        position: relative;
+
+        
+    }
+
+    .newPadding{
+        padding: 16px;
+    }
+}
