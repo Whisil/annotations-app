@@ -4,8 +4,8 @@ import Canvas from '../canvas';
 import styles from './styles.module.scss';
 
 export const Annotations = () => {
-  const [imageName, setImageName] = useState<string>('annotations_default.jpg');
-  const [imageSrc, setImageSrc] = useState<string>('/images/annotations_default.jpg');
+  const [imageName, setImageName] = useState<string>('annotations_default.PNG');
+  const [imageSrc, setImageSrc] = useState<string>('/images/annotations_default.PNG');
 
   const handleImageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
