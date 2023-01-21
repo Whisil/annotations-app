@@ -1,9 +1,10 @@
-import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { signInWithPopup, signOut } from "firebase/auth";
+import { useState } from "react";
+import { useAuthCheck } from "../../hooks/useAuthCheck";
 import { auth, provider } from "../../service/firebase";
 import styles from "./styles.module.scss";
 
-interface UserObj {
+export interface UserObj {
   displayName: string;
   avatarURL: string;
 }
@@ -20,22 +21,8 @@ const Header = () => {
     );
   };
 
-  useEffect(() => {
-    const observer = onAuthStateChanged(auth, (user) => {
-      console.log(user)
-      if (user) {
-        setUser({
-          displayName: user.displayName!,
-          avatarURL: user.photoURL!,
-        });
-      } else {
-        setUser(null);
-      }
-    });
+  useAuthCheck(setUser);
 
-    return () => observer();
-  }, []);
-  // console.log(user)
   return (
     <div className={styles.header}>
       {user && <div className={styles.user}>

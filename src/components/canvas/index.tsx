@@ -4,6 +4,8 @@ import AnnotationsItem from '../annotationsItem';
 import { Annotations, deleteAnnotation, getAnnotations } from '../../utils/annotationsUtils';
 
 import styles from './styles.module.scss';
+import { UserObj } from '../header';
+import { useAuthCheck } from '../../hooks/useAuthCheck';
 
 interface CanvasProps {
   imageSrc: string;
@@ -16,6 +18,7 @@ const Canvas = ({ imageSrc, imageName }: CanvasProps) => {
   const [showTemp, setShowTemp] = useState<boolean>(false);
   const [lastId, setLastId] = useState<number>(0);
   const [canvasOffset, setCanvasOffset] = useState<number>(0);
+  const [user, setUser] = useState<UserObj | null>(null);
 
   const canvasRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -56,7 +59,7 @@ const Canvas = ({ imageSrc, imageName }: CanvasProps) => {
     setTempAnnotations([
       {
         id: lastId !== 0 ? lastId + 1 : 1,
-        author: 'Harry Potter',
+        author: user ? user.displayName : 'Harry Potter',
         onImage: imageName,
         pos: {
           x: parseFloat((e.nativeEvent.offsetX / target.offsetWidth).toFixed(4)),
@@ -78,6 +81,8 @@ const Canvas = ({ imageSrc, imageName }: CanvasProps) => {
   useEffect(() => {
     getAnnotations(setAnnotations, imageName, setLastId);
   }, [imageName]);
+
+  useAuthCheck(setUser);
 
   useEffect(() => {
     function handleResize() {

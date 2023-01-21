@@ -56,6 +56,14 @@
         top: -6px
     }
 
+    .loginNote{
+        display: inline-block;
+        font-size: 12px;
+        line-height: 1;
+        color: #d1001f;
+        padding-top: 10px;
+    }
+
     .commentForm{
         display: flex;
         width: 100%;
@@ -141,6 +149,7 @@
             transform: scale(1.2);
         }
     }
+
     
 }
 

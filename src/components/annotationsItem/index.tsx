@@ -1,7 +1,9 @@
 import clsx from 'clsx'; 
 import React, { useRef, useState } from 'react';
+import { useAuthCheck } from '../../hooks/useAuthCheck';
 import { useClickOutside } from '../../hooks/useClickOutside';
 import { Annotations, nameFormat, postAnnotation } from '../../utils/annotationsUtils';
+import { UserObj } from '../header';
 import styles from './styles.module.scss';
 
 interface ItemProps {
@@ -33,6 +35,7 @@ const AnnotationsItem = ({
 }: ItemProps) => {
   const [visible, setVisible] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>('');
+  const [user, setUser] = useState<UserObj | null>(null);
 
   const annotationRef = useRef<HTMLDivElement>(null);
 
@@ -64,6 +67,8 @@ const AnnotationsItem = ({
     !comment && hideTemp && hideTemp();
   });
 
+  useAuthCheck(setUser);
+console.log(user)
   return (
     <div
       className={clsx(
@@ -104,6 +109,7 @@ const AnnotationsItem = ({
               <img src="/images/ic_send.svg" alt="send btn" />
             </button>
           </form>
+          {!user && <span className={styles.loginNote}>log in to change name</span>}
         </div>
       )}
 
