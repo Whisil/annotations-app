@@ -86,7 +86,7 @@ const AnnotationsItem = ({
           : coordX <= 0.2 && canvasOffset <= 200
           ? styles.alignRightLarge
           : null,
-        coordY >= 0.75 && styles.alignTop
+        coordY >= 0.6 && styles.alignTop
       )}
       style={{
         top: coordY * 100 + `%`,
