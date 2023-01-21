@@ -14,12 +14,18 @@ import { db } from "../service/firebase";
 export interface Annotations {
   id: number;
   author: string;
+  authorImgURL: string;
   comment?: string;
   onImage?: string;
   pos: {
     x: number;
     y: number;
   };
+}
+
+export interface UserObj {
+  displayName: string;
+  avatarURL: string;
 }
 
 export const nameFormat = (name: string) => {
@@ -41,8 +47,10 @@ export const getAnnotations = async (
     )
   ).then((querySnapshot) => {
     const newData = querySnapshot.docs.map((doc) => doc.data());
-    console.log(newData);
-    callback([...newData].filter((item: Annotations) => item.onImage === image));
+
+    callback(
+      [...newData].filter((item: Annotations) => item.onImage === image)
+    );
     setLastId(newData.length);
   });
 };

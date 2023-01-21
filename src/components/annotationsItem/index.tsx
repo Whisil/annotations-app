@@ -1,10 +1,14 @@
-import clsx from 'clsx'; 
-import React, { useRef, useState } from 'react';
-import { useAuthCheck } from '../../hooks/useAuthCheck';
-import { useClickOutside } from '../../hooks/useClickOutside';
-import { Annotations, nameFormat, postAnnotation } from '../../utils/annotationsUtils';
-import { UserObj } from '../header';
-import styles from './styles.module.scss';
+import clsx from "clsx";
+import React, { useRef, useState } from "react";
+import { useAuthCheck } from "../../hooks/useAuthCheck";
+import { useClickOutside } from "../../hooks/useClickOutside";
+import {
+  Annotations,
+  nameFormat,
+  postAnnotation,
+} from "../../utils/annotationsUtils";
+import { UserObj } from "../../utils/annotationsUtils";
+import styles from "./styles.module.scss";
 
 interface ItemProps {
   coordX: number;
@@ -12,6 +16,7 @@ interface ItemProps {
   id: number;
   showingId: number;
   author: string;
+  authorImgURL: string;
   comment?: string;
   handleSubmitNew?: (newAnnotation: Annotations) => void;
   handleDelete?: (id: number) => void;
@@ -26,6 +31,7 @@ const AnnotationsItem = ({
   id,
   showingId,
   author,
+  authorImgURL,
   comment,
   handleSubmitNew,
   handleDelete,
@@ -34,7 +40,7 @@ const AnnotationsItem = ({
   canvasOffset,
 }: ItemProps) => {
   const [visible, setVisible] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>("");
   const [user, setUser] = useState<UserObj | null>(null);
 
   const annotationRef = useRef<HTMLDivElement>(null);
@@ -45,6 +51,7 @@ const AnnotationsItem = ({
     const newAnnotation: Annotations = {
       id: id,
       author: author,
+      authorImgURL: authorImgURL!.length !== 0 ? authorImgURL : "",
       onImage: imageSrc,
       comment: inputValue,
       pos: {
@@ -79,9 +86,13 @@ const AnnotationsItem = ({
           : coordX <= 0.2 && canvasOffset <= 200
           ? styles.alignRightLarge
           : null,
-        coordY >= 0.75 && styles.alignTop,
+        coordY >= 0.75 && styles.alignTop
       )}
-      style={{ top: coordY * 100 + `%`, left: coordX * 100 + `%`, zIndex: visible ? 100 : id }}
+      style={{
+        top: coordY * 100 + `%`,
+        left: coordX * 100 + `%`,
+        zIndex: visible ? 100 : id,
+      }}
       ref={annotationRef}
     >
       <div className={styles.dot} onClick={handleDotClick}>
@@ -99,7 +110,9 @@ const AnnotationsItem = ({
               type="text"
               className={styles.commentFormInput}
               placeholder="Leave a comment"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setInputValue(e.target.value)
+              }
             />
             <button
               disabled={inputValue.length === 0}
@@ -109,20 +122,31 @@ const AnnotationsItem = ({
               <img src="/images/ic_send.svg" alt="send btn" />
             </button>
           </form>
-          {!user && <span className={styles.loginNote}>log in to change name</span>}
+          {!user && (
+            <span className={styles.loginNote}>log in to change name</span>
+          )}
         </div>
       )}
 
       {comment && visible && (
         <div className={clsx(styles.commentContainer, styles.newPadding)}>
           <div className={styles.annotation}>
-            <div className={styles.annotationAvatar}>{nameFormat(author)}</div>
+            <div className={styles.annotationAvatar}>
+              {authorImgURL!.length !== 0 ? (
+                <img className={styles.avatar} src={authorImgURL} alt="" referrerPolicy="no-referrer" />
+              ) : (
+                nameFormat(author)
+              )}
+            </div>
             <div>
               <h5 className={styles.annotationAuthor}>{author}</h5>
               <p className={styles.annotationText}>{comment}</p>
             </div>
           </div>
-          <button className={styles.deleteBtn} onClick={() => handleDelete && handleDelete(id)}>
+          <button
+            className={styles.deleteBtn}
+            onClick={() => handleDelete && handleDelete(id)}
+          >
             <img src="/images/ic_delete.svg" alt="delete btn" />
           </button>
         </div>

@@ -121,6 +121,11 @@
             line-height: 16px;
             color: #FDD5D5;
             font-weight: 600;
+            .avatar{
+                width: 32px;
+                height: 32px;
+                border-radius: 100%;
+            }
         }
 
         &Author{
@@ -129,6 +134,8 @@
             color: $ExtraLightBlack;
             font-weight: 700;
             margin-bottom: 4px;
+
+
         }
         &Text{
             font-size: 14px;

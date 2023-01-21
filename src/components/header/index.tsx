@@ -2,12 +2,9 @@ import { signInWithPopup, signOut } from "firebase/auth";
 import { useState } from "react";
 import { useAuthCheck } from "../../hooks/useAuthCheck";
 import { auth, provider } from "../../service/firebase";
+import { UserObj } from "../../utils/annotationsUtils";
 import styles from "./styles.module.scss";
 
-export interface UserObj {
-  displayName: string;
-  avatarURL: string;
-}
 
 const Header = () => {
   const [user, setUser] = useState<UserObj | null>(null);

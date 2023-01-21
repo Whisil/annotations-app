@@ -4,7 +4,7 @@ import AnnotationsItem from '../annotationsItem';
 import { Annotations, deleteAnnotation, getAnnotations } from '../../utils/annotationsUtils';
 
 import styles from './styles.module.scss';
-import { UserObj } from '../header';
+import { UserObj } from '../../utils/annotationsUtils';
 import { useAuthCheck } from '../../hooks/useAuthCheck';
 
 interface CanvasProps {
@@ -60,6 +60,7 @@ const Canvas = ({ imageSrc, imageName }: CanvasProps) => {
       {
         id: lastId !== 0 ? lastId + 1 : 1,
         author: user ? user.displayName : 'Harry Potter',
+        authorImgURL: user ? user.avatarURL : "",
         onImage: imageName,
         pos: {
           x: parseFloat((e.nativeEvent.offsetX / target.offsetWidth).toFixed(4)),
@@ -126,6 +127,7 @@ const Canvas = ({ imageSrc, imageName }: CanvasProps) => {
             showingId={index + 1}
             id={item.id}
             author={item.author}
+            authorImgURL={item.authorImgURL}
             comment={item.comment}
             handleDelete={handleDelete}
             canvasOffset={canvasOffset}
@@ -140,6 +142,7 @@ const Canvas = ({ imageSrc, imageName }: CanvasProps) => {
               showingId={annotations.length + 1}
               id={item.id}
               author={item.author}
+              authorImgURL={item.authorImgURL}
               comment={item.comment}
               handleSubmitNew={handleSubmitNew}
               hideTemp={handleHideTemp}
