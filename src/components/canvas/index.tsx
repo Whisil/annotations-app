@@ -120,7 +120,7 @@ const Canvas = ({ imageSrc, imageName }: CanvasProps) => {
         />
         {annotations.map((item, index) => (
           <AnnotationsItem
-            key={item.id}
+            key={item.pos.x + item.pos.y}
             coordX={item.pos.x}
             coordY={item.pos.y}
             showingId={index + 1}
@@ -134,7 +134,7 @@ const Canvas = ({ imageSrc, imageName }: CanvasProps) => {
         {showTemp &&
           tempAnnotations.map((item) => (
             <AnnotationsItem
-              key={item.id}
+              key={item.pos.x + item.pos.y}
               coordX={item.pos.x}
               coordY={item.pos.y}
               showingId={annotations.length + 1}

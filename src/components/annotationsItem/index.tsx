@@ -68,7 +68,7 @@ const AnnotationsItem = ({
   });
 
   useAuthCheck(setUser);
-console.log(user)
+
   return (
     <div
       className={clsx(
