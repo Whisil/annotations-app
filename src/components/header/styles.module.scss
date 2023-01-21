@@ -4,6 +4,29 @@
     position: relative;
     padding: 10px 40px;
     background-color: $lightBlack;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+    .user{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &Avatar{
+            width: 32px;
+            height: 32px;
+            border-radius: 100%;
+        }
+
+        &Name{
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 22px;
+            color: $btnBg;
+        }
+    }
 
     .loginBtn{
         display: flex;
@@ -13,7 +36,7 @@
         gap: 8px;
         border-radius: 4px;
         background-color: $btnBg;
-        padding: 9px 24px;
+        padding: 9px 9px;
         color: $lightBlack;
         font-size: 16px;
         line-height: 22px;
